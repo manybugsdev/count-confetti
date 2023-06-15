@@ -5,7 +5,11 @@ export const handler: Handlers = {
     const newCount = await req.json();
     const kv = await Deno.openKv();
     const oldCount = (await kv.get(["count"])).value ?? 0;
-    if (newCount > oldCount) {
+    const dc = newCount - oldCount;
+    // for security and ux...
+    if (newCount - oldCount > 10) {
+      await kv.set(["count"], oldCount + 10);
+    } else if (newCount - oldCount > 0) {
       await kv.set(["count"], newCount);
     } else {
       await kv.set(["count"], oldCount + 1);
