@@ -41,7 +41,7 @@ function confettiRandom() {
 }
 
 export default (props: { count: number }) => {
-  const [count, setCount] = useState(10000);
+  const [count, setCount] = useState(props.count);
   const bc = useMemo(() => new BroadcastChannel("main"), []);
   useEffect(() => {
     bc.onmessage = (e) => {
