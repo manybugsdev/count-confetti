@@ -24,7 +24,7 @@ function Drop() {
 function Rain() {
   const drops = useMemo(() => new Array(1000).fill(0).map(() => <Drop />), []);
   return (
-    <div class="fixed w-full h-screen z-10 bg-black opacity-20">
+    <div class="fixed w-full h-screen-d z-10 bg-black opacity-20">
       {drops}
     </div>
   );
@@ -53,7 +53,7 @@ export default (props: { count: number }) => {
     };
   }, [bc]);
   return (
-    <div class="flex w-full h-0 min-h-screen bg-gray-800 text-green-300 relative overflow-hidden">
+    <div class="flex w-full h-screen-d bg-gray-800 text-green-300 relative overflow-hidden">
       {new Array(Math.ceil(count / 100)).fill(0).map((_) => <Denosaur />)}
       {count >= 10000 && <Rain />}
       <div
@@ -63,7 +63,7 @@ export default (props: { count: number }) => {
         <p class="text-6xl font-bold">{count}</p>
         <p>/ 10000</p>
         <button
-          class="border p-4 rounded mt-4"
+          class="border p-4 rounded mt-4 select-none"
           onClick={() => {
             fetch("/api/count", {
               method: "POST",
