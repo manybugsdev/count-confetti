@@ -30,12 +30,23 @@ function Rain() {
   );
 }
 
+function confettiRandom() {
+  confetti({
+    origin: {
+      x: 0.8 * Math.random() + 0.2,
+      y: 0.8 * Math.random() + 0.2,
+    },
+    angle: 90 * Math.random() + 45,
+  });
+}
+
 export default (props: { count: number }) => {
   const [count, setCount] = useState(props.count);
   const bc = useMemo(() => new BroadcastChannel("main"), []);
   useEffect(() => {
     bc.onmessage = (e) => {
       setCount((n) => n + 1);
+      confettiRandom();
     };
     return () => {
       bc.close();
@@ -53,18 +64,11 @@ export default (props: { count: number }) => {
         <p>/ 10000</p>
         <button
           class="border p-4 rounded mt-4"
-          onClick={async () => {
-            const res = await fetch("/api/countup");
-            if (!res.ok) return;
+          onClick={() => {
+            fetch("/api/countup");
             setCount((n) => n + 1);
             bc.postMessage("countup");
-            confetti({
-              origin: {
-                x: 0.8 * Math.random() + 0.2,
-                y: 0.8 * Math.random() + 0.2,
-              },
-              angle: 90 * Math.random() + 45,
-            });
+            confettiRandom();
           }}
         >
           Count Up
