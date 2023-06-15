@@ -7,9 +7,11 @@ export const handler: Handlers = {
     const oldCount = (await kv.get(["count"])).value ?? 0;
     if (newCount > oldCount) {
       await kv.set(["count"], newCount);
+    } else {
+      await kv.set(["count"], oldCount + 1);
     }
     kv.close();
-    return new Response(newCount > oldCount ? newCount : oldCount, {
+    return new Response(newCount > oldCount ? newCount : oldCount + 1, {
       status: 200,
     });
   },

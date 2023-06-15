@@ -68,6 +68,12 @@ export default (props: { count: number }) => {
             fetch("/api/count", {
               method: "POST",
               body: JSON.stringify(count + 1),
+            }).then((res) => {
+              if (res.ok) {
+                res.json().then((c) => {
+                  setCount((n) => c > n ? c : n);
+                });
+              }
             });
             setCount((n) => n + 1);
             bc.postMessage("countup");
