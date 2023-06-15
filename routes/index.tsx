@@ -5,6 +5,7 @@ import App from "../islands/App.tsx";
 export const handler: Handler = async (req, ctx) => {
   const kv = await Deno.openKv();
   const count = (await kv.get(["count"])).value ?? 0;
+  kv.close();
   return ctx.render(count);
 };
 
