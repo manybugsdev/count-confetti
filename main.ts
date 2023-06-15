@@ -12,10 +12,14 @@ import manifest from "./fresh.gen.ts";
 import twindPlugin from "$fresh/plugins/twind.ts";
 import twindConfig from "./twind.config.ts";
 
-if (Deno.env.get("RESET")) {
-  const kv = await Deno.openKv();
-  await kv.delete(["count"]);
-  kv.close();
+const COUNT = Deno.env.get("COUNT");
+if (COUNT) {
+  const count = parseInt(COUNT);
+  if (!isNaN(count)) {
+    const kv = await Deno.openKv();
+    await kv.set(["count"], count);
+    kv.close();
+  }
 }
 
 await start(manifest, { plugins: [twindPlugin(twindConfig)] });
