@@ -65,7 +65,10 @@ export default (props: { count: number }) => {
         <button
           class="border p-4 rounded mt-4"
           onClick={() => {
-            fetch("/api/countup");
+            fetch("/api/count", {
+              method: "POST",
+              body: JSON.stringify(count + 1),
+            });
             setCount((n) => n + 1);
             bc.postMessage("countup");
             confettiRandom();
