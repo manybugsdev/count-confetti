@@ -1,7 +1,6 @@
 # Count Confetti
 
-This web app can count how many times everyone do confetti. You can see all
-confetti on real time with BroadcastChannel API. The rainfall will start when
+This web app can count how many times everyone do confetti. The rainfall will start when
 confetti counts exceeds 10000.
 
 ## How to deploy
