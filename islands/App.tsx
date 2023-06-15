@@ -67,7 +67,6 @@ export default (props: { count: number }) => {
           onClick={() => {
             fetch("/api/count", {
               method: "POST",
-              body: JSON.stringify(count + 1),
             }).then((res) => {
               if (res.ok) {
                 res.json().then((c) => {
