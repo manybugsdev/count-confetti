@@ -1,0 +1,28 @@
+.denosaur.moving .front-leg {
+    animation: 0.2s infinite linear front-leg-anim;
+}
+
+.denosaur.moving .behind-leg {
+    animation: 0.2s infinite linear behind-leg-anim;
+}
+
+@keyframes front-leg-anim { 
+    0% { transform: none; }
+    50% { transform: rotate(15deg) translateX(20px) translateY(-15px); }
+    100% { transform: none; }  
+}
+
+@keyframes behind-leg-anim { 
+    0% { transform: none; }
+    50% { transform: rotate(-15deg) translateX(-20px) translateY(20px); }
+    100% { transform: none; }  
+}
+
+@keyframes rain-drop {
+    from {
+        top: -50rem;
+    }
+    to {
+        top: 70rem;
+    }
+}

@@ -1,24 +1,31 @@
 import { Head } from "$fresh/runtime.ts";
-import Counter from "../islands/Counter.tsx";
+import { Handler, PageProps } from "$fresh/server.ts";
+import App from "../islands/App.tsx";
 
-export default function Home() {
+export const handler: Handler = async (req, ctx) => {
+  const kv = await Deno.openKv();
+  const count = (await kv.get(["count"])).value ?? 0;
+  return ctx.render(count);
+};
+
+export default function Home(props: PageProps<number>) {
   return (
     <>
       <Head>
-        <title>Fresh App</title>
+        <title>Count Confetti</title>
+        <link rel="stylesheet" href="/global.css" />
       </Head>
-      <div class="p-4 mx-auto max-w-screen-md">
-        <img
-          src="/logo.svg"
-          class="w-32 h-32"
-          alt="the fresh logo: a sliced lemon dripping with juice"
-        />
-        <p class="my-6">
-          Welcome to `fresh`. Try updating this message in the
-          ./routes/index.tsx file, and refresh.
-        </p>
-        <Counter start={3} />
+      <div class="fixed bottom-4 right-4 z-30 ">
+        <a href="https://fresh.deno.dev">
+          <img
+            width="197"
+            height="37"
+            src="https://fresh.deno.dev/fresh-badge.svg"
+            alt="Made with Fresh"
+          />
+        </a>
       </div>
+      <App count={props.data} />
     </>
   );
 }

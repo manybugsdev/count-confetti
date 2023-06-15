@@ -1,11 +1,19 @@
-# fresh project
+# Count Confetti
 
-### Usage
+This web app can count how many times everyone do confetti. You can see all
+confetti on real time with BroadcastChannel API. The rainfall will start when
+confetti counts exceeds 10000.
 
-Start the project:
+## How to deploy
 
-```
+Use [Deno Deploy](https://deno.com/deploy) with Deno KV.
+
+Or run locally.
+
+```sh
 deno task start
 ```
 
-This will watch the project directory and restart as necessary.
+## References
+
+<https://github.com/denoland/showcase_chat>
