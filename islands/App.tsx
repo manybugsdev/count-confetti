@@ -22,7 +22,7 @@ function Drop() {
 }
 
 function Rain() {
-  const drops = new Array(1000).fill(0).map(() => <Drop />);
+  const drops = useMemo(() => new Array(1000).fill(0).map(() => <Drop />), []);
   return (
     <div class="fixed w-full h-screen z-10 bg-black opacity-20">
       {drops}
@@ -41,7 +41,7 @@ function confettiRandom() {
 }
 
 export default (props: { count: number }) => {
-  const [count, setCount] = useState(props.count);
+  const [count, setCount] = useState(10000);
   const bc = useMemo(() => new BroadcastChannel("main"), []);
   useEffect(() => {
     bc.onmessage = (e) => {
